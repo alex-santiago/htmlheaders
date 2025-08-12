@@ -1,0 +1,65 @@
+# Byte-compiled / optimized / DLL files
+
+**pycache**/
+\*.py\[cod]
+\*\$py.class
+
+# Virtual environments
+
+.env
+.venv
+env/
+venv/
+ENV/
+
+# Installer logs
+
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.\*
+.cache
+pytest\_cache/
+nosetests.xml
+coverage.xml
+\*.cover
+\*.py,cover
+.hypothesis/
+
+# Jupyter Notebook checkpoints
+
+.ipynb\_checkpoints
+
+# OS-generated files
+
+.DS\_Store
+Thumbs.db
+
+# IDE/editor specific
+
+.vscode/
+.idea/
+\*.sublime-project
+\*.sublime-workspace
+
+# Logs and temp files
+
+\*.log
+\*.tmp
+\*.temp
+
+# Requests / network capture files
+
+\*.har
+\*.pcap
+
+# Project-specific artifacts
+
+tools/**pycache**/
+

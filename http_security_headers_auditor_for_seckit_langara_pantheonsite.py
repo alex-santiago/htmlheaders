@@ -157,10 +157,16 @@ def evaluate(headers: Dict[str, str]) -> List[Finding]:
 
     # XCTO
     xcto = headers.get("x-content-type-options")
-    if xcto != "nosniff":
-        f.append(Finding("X-Content-Type-Options", False, "medium",
-                        "X-Content-Type-Options missing or not 'nosniff'.",
-                        "Add: X-Content-Type-Options: nosniff"))
+    if not xcto or xcto.lower() != "nosniff":
+        f.append(
+            Finding(
+                "X-Content-Type-Options",
+                False,
+                "medium",
+                "X-Content-Type-Options missing or not 'nosniff'.",
+                "Add: X-Content-Type-Options: nosniff",
+            )
+        )
 
     # Referrer-Policy
     rp = headers.get("referrer-policy")
@@ -299,6 +305,12 @@ class EvaluateTests(unittest.TestCase):
         cookies = {"set-cookie": "sid=abc; Path=/; Secure; HttpOnly; SameSite=Lax"}
         f = check_cookie_flags(cookies)
         self.assertEqual(len(f), 0)
+
+    def test_xcto_case_insensitive(self):
+        headers = {"x-content-type-options": "NoSniff"}
+        findings = evaluate(headers)
+        names = {f.header for f in findings}
+        self.assertNotIn("X-Content-Type-Options", names)
 
 
 class ArgParseTests(unittest.TestCase):
